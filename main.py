@@ -1,5 +1,5 @@
 
-import os, requests, datetime
+import os, requests
 from bs4 import BeautifulSoup
 from telegram import Bot
 
@@ -9,7 +9,7 @@ bot = Bot(token=BOT_TOKEN)
 
 def fetch_new_listings():
     url = "https://land.591.com.tw/list?region=6&type=1&kind=11"
-    resp = requests.get(url)
+    resp = requests.get(url, verify=False)  # 關閉 SSL 憑證驗證
     soup = BeautifulSoup(resp.text, "html.parser")
     items = []
     for card in soup.select(".property-list-item"):
